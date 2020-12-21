@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  dingtalk:
+    image: demo-ldap:latest
+    networks:
+      - intranet
+    ports:
+      - "8888:8080"
+    deploy:
+      restart_policy:
+        condition: on-failure
+  ldap-server:
+    image: pgarrett/ldap-alpine
+    volumes:
+      - "./contrib/ldap/ldap.ldif:/ldif/ldap.ldif"
+    networks:
+      - intranet
+    ports:
+      - "389:389"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  intranet:

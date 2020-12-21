@@ -1,0 +1,19 @@
+micronaut:
+  application:
+    name: demo
+  server:
+    port: 8080
+  security:
+    enabled: false
+    ldap:
+      enabled: true
+      default:
+        context:
+          server: "ldap://ldap-server:389"
+          managerDn: "cn=admin,dc=example,dc=com"
+          managerPassword: "password"
+        search:
+          base: "dc=example,dc=com"
+        groups:
+          enabled: true
+          base: "dc=example,dc=com"
