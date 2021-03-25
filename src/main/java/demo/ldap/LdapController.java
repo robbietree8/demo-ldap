@@ -20,9 +20,8 @@ public class LdapController {
 
     @Post("/login")
     public Mono<MutableHttpResponse> login(@Body AuthRequest request) {
-        System.out.println("");
         Publisher<AuthenticationResponse> publisher = authenticationProvider.authenticate(null, new UsernamePasswordCredentials(request.getUsername(), request.getPassword()));
         return Mono.fromDirect(publisher)
-                   .map(r -> HttpResponse.ok(r));
+                   .map(r -> HttpResponse.ok(r.isAuthenticated()));
     }
 }
